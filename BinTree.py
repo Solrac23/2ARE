@@ -7,6 +7,12 @@ class Node:
     def __str__(self):
         return str(self.data)
 
+    def _getData(self):
+        return self.data
+
+    def _setData(self, data):
+        self.data = data
+
     def _getLeft(self):
         return self.left
 
@@ -19,26 +25,16 @@ class Node:
     def _setRight(self, right):
         self.right = right
 
-    def _getData(self):
-        return self.data
 
-    def _setData(self, right):
-        self.right = right
-
-class Tree:
-    def __init__(self):
+class BinaryTree:
+    def __init__(self, data=None, node=None):
         self.root = None
 
     def _getRoot(self):
         return self.root
 
-    def isEmpty(self):
-        if self.root == None:
-            return True
-        return False
-    
     def insert(self, data):
-        # criar um novo nó
+        # cria um novo nó
         node = Node(data)
 
         # verifica se a árvore está vazia
@@ -64,24 +60,26 @@ class Tree:
                         data_node._setLeft(node)
                     else:
                         data_node._setRight(node)
-                    break # finaliza o loop
+                    break
     
-    # mostra árvore Pré-Ordem (raiz-esq-dir)
+    # verifica se está vazio 
+    def isEmpty(self):
+        if self.root == None:
+            return True
+        return False
+
+    # mostra em pré-ordem (raiz-esq-dir)
     def show(self, curr_node):
-       if curr_node != None:
-           print('%d' % curr_node._getData(), end=' ')
-           self.show(curr_node._getLeft())
-           self.show(curr_node._getRight())
+        try:
+            if curr_node != None:
+                print('%d' % curr_node._getData(), end=' ')
+                self.show(curr_node._getLeft())
+                self.show(curr_node._getRight())
+        except IndexError as voidIndex:
+            print('Value not found {}'.format(voidIndex))
 
-tree = Tree()
-
-tree.insert(8)
-tree.insert(3)
-tree.insert(1)
-tree.insert(6)
-tree.insert(4)
-tree.insert(7)
-tree.insert(10)
-tree.insert(14)
-tree.insert(13)
-tree.show(tree._getRoot())
+if __name__ == "__main__":
+    tree = BinaryTree()
+    tree.show(5) # irá apresentar erro, pois não irá encontrar o valor 5 na busca,
+                 # levantando um erro no código  de "_getData", pelo fato de não econtar
+                 # onde valor foi inserido.
