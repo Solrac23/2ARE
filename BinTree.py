@@ -81,5 +81,5 @@ class BinaryTree:
 if __name__ == "__main__":
     tree = BinaryTree()
     tree.show(5) # irá apresentar erro, pois não irá encontrar o valor 5 na busca,
-                 # levantando um erro no código  de "_getData", pelo fato de não econtar
+                 # levantando um erro no código  de "_getData", pelo fato de não encontrar
                  # onde valor foi inserido.
